@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FileSpreadsheet, Mail, MessageSquare, Brain, ChevronDown, ChevronUp, Plus } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const CollapsibleSection = ({ title, children, isOpen, toggleOpen }) => (
   <div className="border rounded-md my-2">
@@ -14,16 +15,38 @@ const CollapsibleSection = ({ title, children, isOpen, toggleOpen }) => (
   </div>
 );
 
-const Dashboard = () => (
-  <div>
-    <h3 className="font-semibold mb-2">운영</h3>
-    <div className="h-32 bg-gray-100 rounded-md"></div>
-  </div>
-);
+const Dashboard = () => {
+  const data = [
+    { name: '1월', value: 4000 },
+    { name: '2월', value: 3000 },
+    { name: '3월', value: 2000 },
+    { name: '4월', value: 2780 },
+    { name: '5월', value: 1890 },
+    { name: '6월', value: 2390 },
+    { name: '7월', value: 3490 },
+  ];
+
+  return (
+    <div>
+      <h3 className="font-semibold mb-2">운영</h3>
+      <div className="h-64 bg-white rounded-md shadow-md p-4">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
 
 const WelcomeMessage = () => (
   <div className="bg-sky-300 p-4 rounded-md my-4">
-    <h2 className="text-xl font-bold mb-2">Make에 오신 것을 환영합니다!</h2>
+    <h2 className="text-xl font-bold mb-2">EZFlow에 오신 것을 환영합니다!</h2>
     <p>시작하는 데 도움이 되도록 인기 있는 앱 조합 모음을 준비했습니다.</p>
     <p>또는 원하는 것을 알고 있다면 <a href="#" className="text-blue-600 underline">시나리오 빌더</a>로 바로 이동하여 1600개 이상의 앱을 찾아보세요.</p>
   </div>
@@ -113,30 +136,32 @@ export const MainDashboard = ({ isExpanded }) => {
   };
 
   return (
-    <div className={`flex-1 transition-all duration-300 ease-in-out ${isExpanded ? 'ml-16' : 'ml-16'}`}>
-      <div className="p-4">
-        <CollapsibleSection
-          title="대시보드"
-          isOpen={openSections.dashboard}
-          toggleOpen={() => toggleSection('dashboard')}
-        >
-          <Dashboard />
-        </CollapsibleSection>
-        <CollapsibleSection
-          title="활성 시나리오"
-          isOpen={openSections.activeScenarios}
-          toggleOpen={() => toggleSection('activeScenarios')}
-        >
-          <WelcomeMessage />
-          <TriggerActionSection />
-        </CollapsibleSection>
-        <CollapsibleSection
-          title="탐색"
-          isOpen={openSections.explore}
-          toggleOpen={() => toggleSection('explore')}
-        >
-          <ExploreSection />
-        </CollapsibleSection>
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex-grow overflow-y-auto">
+        <div className={`p-4 transition-all duration-300 ease-in-out ${isExpanded ? 'ml-16' : 'ml-16'}`}>
+          <CollapsibleSection
+            title="대시보드"
+            isOpen={openSections.dashboard}
+            toggleOpen={() => toggleSection('dashboard')}
+          >
+            <Dashboard />
+          </CollapsibleSection>
+          <CollapsibleSection
+            title="활성 시나리오"
+            isOpen={openSections.activeScenarios}
+            toggleOpen={() => toggleSection('activeScenarios')}
+          >
+            <WelcomeMessage />
+            <TriggerActionSection />
+          </CollapsibleSection>
+          <CollapsibleSection
+            title="탐색"
+            isOpen={openSections.explore}
+            toggleOpen={() => toggleSection('explore')}
+          >
+            <ExploreSection />
+          </CollapsibleSection>
+        </div>
       </div>
     </div>
   );

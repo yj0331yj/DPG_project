@@ -29,7 +29,7 @@ export const Sidebar = ({ isExpanded, onMouseEnter, onMouseLeave }) => {
   return (
     <div
       className={`
-        bg-gradient-to-b from-sky-400 to-blue-600
+        bg-gradient-to-b from-sky-300 to-blue-900
         flex flex-col justify-between transition-all duration-300 ease-in-out
         fixed left-0 top-0 h-screen
         ${isExpanded ? 'w-64' : 'w-16'} p-2

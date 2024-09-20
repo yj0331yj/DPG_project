@@ -4,7 +4,7 @@ const BottomToolbar = ({ isExpanded }) => {
   return (
     <div className={`border-t p-4 flex justify-between items-center bg-white shadow-lg`}>
       <div className="flex items-center space-x-4">
-        <button className="flex items-center space-x-2 bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-sky-500 transition-colors">
+        <button className="flex items-center space-x-2 bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-sky-500 transition-colors">
           <span>Run once</span>
         </button>
         <div className="flex items-center space-x-2 text-gray-600">
