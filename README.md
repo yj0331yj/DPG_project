@@ -1,6 +1,4 @@
-# EZFlow
-
-# **1. 개요**
+# EZFlow Project 개요
 
 ## 1. 아이디어/서비스명
 
